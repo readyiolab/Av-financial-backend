@@ -24,8 +24,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({
   origin: [
-      "https://singhkarman.com",
-      "http://localhost:8081", // 👈 allow local frontend for development
+      "https://avfinancial.com/",
+      "http://localhost:8080", // 👈 allow local frontend for development
     ], // Adjust to your frontend URL
   credentials: true, // Allow cookies to be sent
 }));

@@ -20,7 +20,8 @@ class ContactUsController {
 
       const contact = await contactUsService.createContact(value);
 
-      await emailService.sendAdminNotification({
+      // Send contact inquiry email to admin (shrutep@avfinancial.com)
+      await emailService.sendContactInquiry({
         name: value.name,
         email: value.email,
         phone: value.phone,

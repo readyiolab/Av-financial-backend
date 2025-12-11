@@ -6,10 +6,11 @@ const transporter = require("../utils/transporter");
 class EmailService {
   constructor() {
     this.transporter = transporter;
-    this.fromEmail = process.env.GMAIL_USER || "psurya162@gmail.com";
-    this.adminEmail = process.env.ADMIN_EMAIL || "psurya162@gmail.com";
+    this.fromEmail = process.env.GMAIL_USER || "psurya162@gmail.com"; // Gmail account for sending
+    this.displayEmail = "shrutep@avfinancial.com"; // Display email for clients
+    this.adminEmail = "shrutep@avfinancial.com"; // All notifications go here
     this.companyName = "AV Financial Partners";
-    this.websiteUrl = "https://singhkarman.com";
+    this.websiteUrl = "https://avfinancial.com/";
   }
 
   /**
@@ -24,7 +25,8 @@ class EmailService {
       await fs.access(pdfPath);
 
       const mailOptions = {
-        from: `"${this.companyName}" <${this.fromEmail}>`,
+        from: `"${this.companyName}" <${this.displayEmail}>`, // Shows as shrutep@avfinancial.com
+        replyTo: this.displayEmail, // Replies go to shrutep@avfinancial.com
         to: email,
         subject: `Your Free Financial Guide: ${pdf.replace('.pdf', '')}`,
         html: this.generateUserEmailHTML(name, pdf),
@@ -53,15 +55,15 @@ class EmailService {
     const { name, email, phone, pdf } = data;
 
     const mailOptions = {
-      from: `"${this.companyName}" <${this.fromEmail}>`,
-      to: this.adminEmail,
+      from: `"${this.companyName}" <${this.fromEmail}>`, // Admin emails from Gmail
+      to: this.adminEmail, // Goes to shrutep@avfinancial.com
       subject: `New PDF Download Request: ${pdf.replace('.pdf', '')}`,
       html: this.generateAdminEmailHTML(name, email, phone, pdf),
     };
 
     try {
       const result = await this.transporter.sendMail(mailOptions);
-      console.log(`✅ Admin notification sent - Message ID: ${result.messageId}`);
+      console.log(`✅ Admin notification sent to ${this.adminEmail} - Message ID: ${result.messageId}`);
       return result;
     } catch (err) {
       console.error("❌ Error sending admin notification:", err);
@@ -76,15 +78,15 @@ class EmailService {
     const { name, email, phone, inquiry_type, message } = data;
 
     const mailOptions = {
-      from: `"${this.companyName}" <${this.fromEmail}>`,
-      to: this.adminEmail,
+      from: `"${this.companyName}" <${this.fromEmail}>`, // Admin emails from Gmail
+      to: this.adminEmail, // Goes to shrutep@avfinancial.com
       subject: `New ${inquiry_type.charAt(0).toUpperCase() + inquiry_type.slice(1)} Inquiry from ${name}`,
       html: this.generateContactEmailHTML(name, email, phone, inquiry_type, message),
     };
 
     try {
       const result = await this.transporter.sendMail(mailOptions);
-      console.log(`✅ Contact inquiry sent - Message ID: ${result.messageId}`);
+      console.log(`✅ Contact inquiry sent to ${this.adminEmail} - Message ID: ${result.messageId}`);
       return result;
     } catch (err) {
       console.error("❌ Error sending contact inquiry:", err);
@@ -110,9 +112,6 @@ class EmailService {
             
             <!-- Header with Logo -->
             <div style="background: linear-gradient(135deg, #1a2957 0%, #2563eb 100%); padding:30px; text-align:center;">
-              <img src="https://res.cloudinary.com/dbyjiqjui/image/upload/v1755252650/Screenshot_2025-08-15_111734_eapr3s.png" 
-                   alt="${this.companyName}" 
-                   style="max-width:180px; display:block; margin:auto; background-color:rgba(255,255,255,0.95); padding:12px; border-radius:8px;" />
               <h1 style="color:#ffffff; font-size:24px; margin:20px 0 0; font-weight:600;">Your Financial Guide is Ready!</h1>
             </div>
             

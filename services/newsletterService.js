@@ -295,30 +295,30 @@ class NewsletterService {
   async sendConfirmationEmail(email, token) {
     try {
       const confirmationUrl = `${
-        process.env.FRONTEND_URL || "https://singhkarman.com"
+        process.env.FRONTEND_URL || "https://avfinancial.com"
       }/confirm-subscription?email=${encodeURIComponent(
         email
       )}&token=${encodeURIComponent(token)}`;
 
       const mailOptions = {
-        from: `"Karman Singh" <${process.env.SMTP_FROM || "admin@singhkarman.com"}>`,
+        from: `"Shrutep" <${process.env.SMTP_FROM || " shrutep@avfinancial.com"}>`,
         to: email,
         subject: "Confirm Your Newsletter Subscription",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #2c3e50;">Welcome to Karman Singh Newsletter!</h2>
+            <h2 style="color: #2c3e50;">Welcome to Shrutep Newsletter!</h2>
             <p>Hi there,</p>
             <p>Thank you for subscribing to our newsletter! We're excited to share financial insights and strategies to help you build generational wealth.</p>
             <p>To complete your subscription, please <a href="${confirmationUrl}" style="background-color: #3498db; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">Confirm Your Subscription</a></p>
             <p>Or copy and paste this link into your browser:</p>
             <p><a href="${confirmationUrl}">${confirmationUrl}</a></p>
             <p>If you didn't request this subscription, please ignore this email.</p>
-            <p>Best regards,<br>The Karman Singh Team</p>
+            <p>Best regards,<br>The Shrutep Team</p>
             <hr style="margin-top: 30px;">
             <p style="font-size: 12px; color: #7f8c8d;">
-              <strong>Karman Singh</strong><br>
+              <strong>Shrutep</strong><br>
               Building generational wealth through purpose-driven financial strategies<br>
-              <a href="mailto:admin@singhkarman.com">admin@singhkarman.com</a> | (206) 801-0330
+              <a href="mailto: shrutep@avfinancial.com"> shrutep@avfinancial.com</a> | (206) 801-0330
             </p>
           </div>
         `,
@@ -330,7 +330,7 @@ class NewsletterService {
       console.error("Error sending confirmation email:", error);
       if (error.responseCode === 550) {
         console.error(
-          "Sender verification issue: Verify 'admin@singhkarman.com' or 'singhkarman.com' in SMTP2GO under Sending > Verified Senders."
+          "Sender verification issue: Verify ' shrutep@avfinancial.com' or 'singhkarman.com' in SMTP2GO under Sending > Verified Senders."
         );
       }
       throw new Error("Failed to send confirmation email");
@@ -340,22 +340,22 @@ class NewsletterService {
   async sendUnsubscribeConfirmation(email) {
     try {
       const mailOptions = {
-        from: `"Karman Singh" <${process.env.SMTP_FROM || "admin@singhkarman.com"}>`,
+        from: `"Shrutep" <${process.env.SMTP_FROM || " shrutep@avfinancial.com"}>`,
         to: email,
         subject: "Unsubscription Confirmed",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #2c3e50;">Unsubscription Confirmed</h2>
             <p>Hi there,</p>
-            <p>Your subscription to the Karman Singh newsletter has been successfully removed.</p>
+            <p>Your subscription to the Shrutep newsletter has been successfully removed.</p>
             <p>If you change your mind and want to receive our financial insights again, you can always resubscribe on our website.</p>
             <p>Thank you for being part of our community!</p>
-            <p>Best regards,<br>The Karman Singh Team</p>
+            <p>Best regards,<br>The Shrutep Team</p>
             <hr style="margin-top: 30px;">
             <p style="font-size: 12px; color: #7f8c8d;">
-              <strong>Karman Singh</strong><br>
+              <strong>Shrutep</strong><br>
               Building generational wealth through purpose-driven financial strategies<br>
-              <a href="mailto:admin@singhkarman.com">admin@singhkarman.com</a> | (206) 801-0330
+              <a href="mailto: shrutep@avfinancial.com"> shrutep@avfinancial.com</a> | (206) 801-0330
             </p>
           </div>
         `,
@@ -367,7 +367,7 @@ class NewsletterService {
       console.error("Error sending unsubscribe confirmation:", error);
       if (error.responseCode === 550) {
         console.error(
-          "Sender verification issue: Verify 'admin@singhkarman.com' or 'singhkarman.com' in SMTP2GO."
+          "Sender verification issue: Verify ' shrutep@avfinancial.com' or 'singhkarman.com' in SMTP2GO."
         );
       }
       console.log(`Failed to send unsubscribe confirmation to ${email}`);
@@ -385,7 +385,7 @@ class NewsletterService {
       const emailContent = createEmailWrapper(campaign.content, unsubscribeUrl);
 
       const mailOptions = {
-        from: `"Karman Singh" <${process.env.SMTP_FROM || "admin@singhkarman.com"}>`,
+        from: `"Shrutep" <${process.env.SMTP_FROM || " shrutep@avfinancial.com"}>`,
         to: subscriber.email,
         subject: campaign.subject,
         html: emailContent,
@@ -400,7 +400,7 @@ class NewsletterService {
       console.error("Error sending campaign email:", error);
       if (error.responseCode === 550) {
         console.error(
-          "Sender verification issue: Verify 'admin@singhkarman.com' or 'singhkarman.com' in SMTP2GO."
+          "Sender verification issue: Verify ' shrutep@avfinancial.com' or 'singhkarman.com' in SMTP2GO."
         );
       }
       throw new Error("Failed to send campaign email");

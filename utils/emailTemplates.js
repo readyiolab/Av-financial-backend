@@ -25,9 +25,7 @@ const createEmailWrapper = (content, unsubscribeUrl) => {
           <!-- Unsubscribe Section -->
           <tr>
             <td style="padding: 30px; background-color: #f8f9fa; border-top: 1px solid #e0e0e0;">
-              <p style="margin: 0 0 10px 0; font-size: 12px; color: #6c757d; line-height: 1.5;">
-                You're receiving this email because you subscribed to Karman Singh's newsletter.
-              </p>
+            
               <p style="margin: 0; font-size: 12px; color: #6c757d;">
                 <a href="${unsubscribeUrl}" style="color: #6c757d; text-decoration: underline;">Unsubscribe</a> from this list
               </p>
